@@ -44,7 +44,19 @@ Route::prefix('admin')->group(function () {
 
     // Relacionar Item do Cardápio com uma Categoria
     Route::post('/itens-cardapio/{id}/relacionar-categoria', [AdminCardapioController::class, 'relacionarItemCategoria']);
-});
+
+    // Atualizar Categoria
+    Route::put('/categorias/{id}', [AdminCardapioController::class, 'atualizarCategoria']);
+
+    // Remover Categoria
+    Route::delete('/categorias/{id}', [AdminCardapioController::class, 'removerCategoria']);
+  
+    // Visualizar Itens por Categoria
+    Route::get('/categorias/{id}/itens', [AdminCardapioController::class, 'visualizarItensPorCategoria']);
+  
+    // Ordenar Itens
+    Route::get('/itens-cardapio/ordenar', [AdminCardapioController::class, 'ordenarItens']);
+  });
 
 // Rotas do CardapioController
 Route::prefix('cardapio')->group(function () {
@@ -56,6 +68,12 @@ Route::prefix('cardapio')->group(function () {
 
     // Pesquisar Itens do Cardápio
     Route::get('/pesquisar', [CardapioController::class, 'pesquisarItens']);
+
+     // Filtrar Itens por Categoria
+     Route::get('/itens/filtrar', [CardapioController::class, 'filtrarItensPorCategoria']);
+
+     // Ordenar Itens
+     Route::get('/itens/ordenar', [CardapioController::class, 'ordenarItens']);
 });
 
 // Rotas do PedidoController
@@ -80,6 +98,15 @@ Route::prefix('pedidos')->group(function () {
 
     // Visualizar Histórico de Pedidos
     Route::get('/historico', [PedidoController::class, 'visualizarHistoricoPedidos']);
+
+    // Adicionar Observação ao Pedido
+    Route::put('/{id}/adicionar-observacao', [PedidoController::class, 'adicionarObservacao']);
+
+    // Confirmar Pedido
+    Route::put('/{id}/confirmar', [PedidoController::class, 'confirmarPedido']);
+    
+    // Cancelar Pedido
+    Route::put('/{id}/cancelar', [PedidoController::class, 'cancelarPedido']);
 });
 
 // Rota do QrcodeController

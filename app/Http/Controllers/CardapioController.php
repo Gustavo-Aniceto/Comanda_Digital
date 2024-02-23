@@ -42,6 +42,26 @@ class CardapioController extends Controller
         return response()->json($itens);
     }
 
+      // Filtrar Itens por Categoria
+      public function filtrarItensPorCategoria(Request $request)
+      {
+          $categoria_id = $request->input('categoria_id');
+  
+          $itens = ItemCardapio::where('categoria_id', $categoria_id)->get();
+          
+          return response()->json($itens);
+      }
+  
+      // Ordenar Itens
+      public function ordenarItens(Request $request)
+      {
+          $campo = $request->input('campo');
+          $ordem = $request->input('ordem', 'asc');
+  
+          $itens = ItemCardapio::orderBy($campo, $ordem)->get();
+          return response()->json($itens);
+      }
+
    
 
 }

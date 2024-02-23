@@ -116,4 +116,39 @@ class PedidoController extends Controller
         $historico = Pedido::where('user_id', auth()->id())->where('status', '!=', 'em_andamento')->get();
         return response()->json($historico);
     }
+    // Adicionar Observação ao Pedido
+    public function adicionarObservacao(Request $request, $id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        $pedido->observacao = $request->input('observacao');
+        $pedido->save();
+
+        return response()->json(['mensagem' => 'Observação adicionada ao pedido'], 200);
+    }
+
+    // Confirmar Pedido
+    public function confirmarPedido($id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        $pedido->status = 'confirmado';
+        $pedido->save();
+
+        // Aqui você pode adicionar lógica para enviar notificação ao usuário
+
+        return response()->json(['mensagem' => 'Pedido confirmado'], 200);
+    }
+
+    // Cancelar Pedido
+    public function cancelarPedido($id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        $pedido->status = 'cancelado';
+        $pedido->save();
+
+        // Aqui você pode adicionar lógica para enviar notificação ao usuário
+
+        return response()->json(['mensagem' => 'Pedido cancelado'], 200);
+    }
+
+    
 }
