@@ -4,6 +4,8 @@ use App\Http\Controllers\CardapioController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\QrcodeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,7 +109,30 @@ Route::prefix('pedidos')->group(function () {
     
     // Cancelar Pedido
     Route::put('/{id}/cancelar', [PedidoController::class, 'cancelarPedido']);
+
+    Route::get('/pedidos/novos', 'PedidoController@buscarNovosPedidos');
 });
 
 // Rota do QrcodeController
 Route::get('/qrcode/abrir-cardapio', [QrcodeController::class, 'abrirCardapio']);
+
+
+//Rota para login e autentificação 
+// Rota para exibir o formulário de login para administradores
+Route::get('/admin/login', [AdminLoginController::class, 'showLoginForm'])->name('admin.login');
+
+// Rotas de administradores
+Route::post('/admin/login', [AdminLoginController::class, 'login']);
+Route::post('/admin/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('admin.logout');
+
+
+  //rota para Autentificação
+  Route::prefix('admin')->group(function () {
+    // Rotas de autenticação
+    Route::get('/register', 'AdminAuthController@showRegisterForm')->name('admin.register');
+    Route::post('/register', 'AdminAuthController@register');
+    Route::get('/login', 'AdminAuthController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'AdminAuthController@login');
+    Route::post('/logout', 'AdminAuthController@logout')->name('admin.logout');
+});
