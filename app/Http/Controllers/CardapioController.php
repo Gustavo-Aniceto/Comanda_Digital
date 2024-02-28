@@ -14,7 +14,7 @@ class CardapioController extends Controller
     public function listarItens()
     {
         $itens = ItemCardapio::all();
-        return response()->json($itens);
+        return view('Inicio', ['categorias' => $itens]);
     }
 
     //função para visualizar os detalhes de um item específico do cardápio.
