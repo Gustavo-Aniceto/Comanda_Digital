@@ -1,9 +1,13 @@
+<!-- Inicio.blade.php -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cardápio</title>
+    </head>
+<body>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,7 +16,7 @@
             background-color: #f0f0f0;
         }
         .header {
-            background-image: url('restaurant.jpg'); /* Imagem genérica */
+            background-image: url('restaurant.jpg'); /* Imagem qualquer */
             background-size: cover;
             background-position: center;
             color: white;
@@ -42,16 +46,41 @@
             background-color: #0056b3;
         }
     </style>
+
 </head>
 <body>
-    <div class="header">
-        <h1>Cardápio</h1>
+    
+    <div class="categorias" id="categorias">
+        <!-- Aqui exibidas categorias -->
     </div>
-    <div class="categorias">
-        <button class="categoria-btn">Categoria 1</button>
-        <button class="categoria-btn">Categoria 2</button>
-        <button class="categoria-btn">Categoria 3</button>
-        <!-- Adicione mais botões conforme necessário -->
-    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Ao carregar a página, listar as categorias
+            $.ajax({
+                url: '/listar-categorias', // Rota que lista as categorias
+                type: 'GET',
+                success: function(response) {
+                    // Exibir as categorias na página
+                    response.forEach(function(categoria) {
+                        $('#categorias').append('<button class="categoria-btn" onclick="listarItens(\'' + categoria.nome + '\')">' + categoria.nome + '</button>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Lidar com erros, se necessário
+                    console.error(error);
+                }
+            });
+        });
+
+        // Função para listar itens de uma categoria específica
+        function listarItens(categoria) {
+            
+
+
+            
+        }
+    </script>
 </body>
 </html>

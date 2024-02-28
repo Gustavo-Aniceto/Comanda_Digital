@@ -62,6 +62,10 @@ Route::prefix('admin')->group(function () {
 
 // Rotas do CardapioController
 Route::prefix('cardapio')->group(function () {
+
+    //listar categorias
+    Route::get('/listar-categorias', 'CardapioController@listarCategorias');
+
     // Listar Todos os Itens do Cardápio
     Route::get('/itens', [CardapioController::class, 'listarItens']);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pedido;
+use App\Models\Categoria;
 
 class PedidoController extends Controller
 {
@@ -108,7 +109,6 @@ class PedidoController extends Controller
         return response()->json(['total' => $total]);
     }
 
-    // Finalizar um Pedido (alterar status para "finalizado" ou similar)
 
     // Visualizar Histórico de Pedidos
     public function visualizarHistoricoPedidos()

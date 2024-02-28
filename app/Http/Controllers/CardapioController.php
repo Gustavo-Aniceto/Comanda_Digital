@@ -23,7 +23,7 @@ class CardapioController extends Controller
         $item = ItemCardapio::find($id);
 
         if (!$item) {
-            return response()->json(['mensagem' => 'Item não encontrado'], 404);
+            return view()->json(['mensagem' => 'Item não encontrado'], 404);
         }
 
         return response()->json($item);
