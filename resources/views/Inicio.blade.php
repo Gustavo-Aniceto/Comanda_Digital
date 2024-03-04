@@ -16,7 +16,7 @@
             background-color: #f0f0f0;
         }
         .header {
-            background-image: url('restaurant.jpg'); /* Imagem qualquer */
+            background-image: url('imagem de fundo do backgraund.jpg'); /* Imagem qualquer */
             background-size: cover;
             background-position: center;
             color: white;
@@ -78,8 +78,6 @@
         function listarItens(categoria) {
             
 
-
-            
         }
     </script>
 </body>

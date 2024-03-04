@@ -26,7 +26,7 @@ class CardapioController extends Controller
             return view()->json(['mensagem' => 'Item não encontrado'], 404);
         }
 
-        return response()->json($item);
+        return view ('Inicio',['detalhes'] => $itens);
     }
 
     // função para permitir que os usuários pesquisem itens no cardápio com base em critérios específicos.
@@ -39,7 +39,8 @@ class CardapioController extends Controller
                               ->orWhere('descricao', 'like', '%' . $termoPesquisa . '%')
                               ->get();
 
-        return response()->json($itens);
+        return view ('Inicio',['busca'] => $itens);
+
     }
 
       // Filtrar Itens por Categoria
@@ -49,7 +50,8 @@ class CardapioController extends Controller
   
           $itens = ItemCardapio::where('categoria_id', $categoria_id)->get();
           
-          return response()->json($itens);
+          return view ('Inicio',['filtro'] => $itens);
+
       }
   
       // Ordenar Itens
@@ -59,7 +61,8 @@ class CardapioController extends Controller
           $ordem = $request->input('ordem', 'asc');
   
           $itens = ItemCardapio::orderBy($campo, $ordem)->get();
-          return response()->json($itens);
+          return view ('Inicio',['ordem'] => $itens);
+
       }
 
    
