@@ -17,9 +17,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', function () {
-  return view('welcome');
-});
+
 
 // Rotas do AdminCardapioController
 Route::prefix('admin')->group(function (){
