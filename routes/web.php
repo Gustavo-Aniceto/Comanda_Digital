@@ -19,9 +19,10 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 */
 Route::get('/', function () {
   return view('welcome');
+});
 
 // Rotas do AdminCardapioController
-Route::prefix('admin')->group(function)
+Route::prefix('admin')->group(function (){
     // Listar Todos os Itens do Cardápio
     Route::get('/itens-cardapio', [AdminCardapioController::class, 'listarItens']);
 
